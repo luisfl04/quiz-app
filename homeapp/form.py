@@ -4,9 +4,13 @@ from .models import QuestionQuiz, ChoiceQuiz
 
 class Quizform(forms.ModelForm):
 
-    model = QuestionQuiz, ChoiceQuiz
+    class Meta:
+        model = QuestionQuiz
 
-    fields = [
-        "Add a question",
-        "Insert choices related to questions"
-    ]
+        fields = [
+            "question_txt",
+            "subject",
+            "description",
+        ]
+
+    

@@ -6,21 +6,30 @@ from .models import QuestionQuiz, ChoiceQuiz
 from .form import Quizform
 from django.views import generic
 
+
 def index(request):
-    latest_question_list = QuestionQuiz.objects.order_by("-pub_date")
+    latest_question_list = QuestionQuiz.objects.all()
     template = "index.html"
     context = {
         "latest_question_list": latest_question_list
     }
     return render(request, template, context)
     
-class DetailView(generic.DetailView):
-    model = QuestionQuiz
-    template_name = "detail.html"
+def detail(request, question_id):
+    question = get_object_or_404(QuestionQuiz, pk = question_id)
+    template = "detail.html"
+    context = {
+        "question": question
+    }
+    return render(request, template, context)           
 
-class ResultsView(generic.DetailView):
-    model = QuestionQuiz
-    template_name = "results.html"
+def results(request, question_id):
+    question = get_object_or_404(QuestionQuiz, pk = question_id)
+    template = "results.html"
+    context = {
+        "question": question,
+    }
+    return render(request, template, context)
 
 def vote(request, question_id):
     question = get_object_or_404(QuestionQuiz, pk = question_id)
@@ -36,15 +45,15 @@ def vote(request, question_id):
             }
         )
     else:
-        selected_choice.vote += 1
+        selected_choice.votes += 1
         selected_choice.save()
-        return HttpResponseRedirect(reverse("results", args = (question.id, )))
+        return HttpResponseRedirect(reverse("results", args = (question.id,)))
     
 def create(request):
-    form = Quizform(request.POST or None) 
+    form =  Quizform(request.POST or None)
 
     if form.is_valid():
-        form.save
+        form.save()
         return HttpResponseRedirect(reverse("index"))
     
     template = "new.html"

@@ -2,12 +2,12 @@
 
 {% block content %} 
 
-<h3>{{questionquiz.question_txt}}</h3>
+<h3>{{question.question_txt}}</h3>
 
 <ul>
-    {% for choice in questionquiz.choicequiz_set.all %} 
+    {% for choice in question.choicequiz_set.all %} 
     <li>
-     {{choicequiz.choice_txt}} --- {{choice.vote}} votes 
+     {{choice.choice_txt}} --- {{choice.votes}} vote{{choice.votes|pluralize}}
     </li>
     {% endfor%}
 </ul>

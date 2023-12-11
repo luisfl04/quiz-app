@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content%} 
+{% block content %} 
 
 <h2>Questions:</h2>
 
@@ -15,12 +15,18 @@
             </div>
             <div class="card-body">
                 <h3 class="card-title">Subject: {{question.subject}}</h3>
-                <h2 class="card-text">Question: {{question.question_txt}}</h2>
+                <h2 class="card-text">
+                    <a href="{% url 'detail' question.id %}">Question: {{question.question_txt}}</a>
+                </h2>
+                <h2 class="card-text"> Description: {{question.description}}</h2> 
                 <a href="{% url 'update' question.id %}" class="btn brt-sm btn primary"> To edite </a>
                 <a href="{% url 'delete' question.id %}" class="btn btn-sm btn-danger">Delete</a>    
             </div>
         </div>
     {% endfor %}    
+
+{% else %}
+    <p>No questions avaliabe</p>
 
 {% endif %}
 
