@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %} 
+
+<h3> {{action }} note </h3>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% if form.errors %} 
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+        <p>Plese, check errors </p><br>
+        {{form.errors}}
+    </div>
+    {% endif %}
+
+    <label for="form.nome.id_for_label"> Question: </label>
+    <div class="form-group col-12">
+        {{form.description.error}}<br>
+        {{form.description}}
+    </div>
+
+    <label for="form.nome.id_for_label">
+        <div class="form-group col-12">
+            {{form.descriptio.errors}}<br>
+            {{form.description}}   
+        </div>
+    </label>
+
+    <input type="submit" value="save" class="btn btn-sm btn-primary">
+    
+</form>
+
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %} 
+
+<h3>{{questionquiz.question_txt}}</h3>
+
+<ul>
+    {% for choice in questionquiz.choicequiz_set.all %} 
+    <li>
+     {{choicequiz.choice_txt}} --- {{choice.vote}} votes 
+    </li>
+    {% endfor%}
+</ul>
+
+<a href="{% url 'detail' question.id %}"> Vote again?</a>
+
+{% endblock %}

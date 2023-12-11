@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content%} 
+
+<h2>Questions:</h2>
+
+{% if latest_question_list %} 
+
+    {% for question in latest_question_list %}
+
+        <div class="card" style="width:50rem;">
+            <div class="card-header">
+            Create at: {{question.created_at}}<br>
+            Update at: {{question.update_at}}
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Subject: {{question.subject}}</h3>
+                <h2 class="card-text">Question: {{question.question_txt}}</h2>
+                <a href="{% url 'update' question.id %}" class="btn brt-sm btn primary"> To edite </a>
+                <a href="{% url 'delete' question.id %}" class="btn btn-sm btn-danger">Delete</a>    
+            </div>
+        </div>
+    {% endfor %}    
+
+{% endif %}
+
+
+{% endblock %}
